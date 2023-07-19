@@ -33,7 +33,12 @@ def my_link():
         if "question" + str(i) in request.form.to_dict():
             questions.append(request.form.get("question" + str(i)))
     answers = bert_model(paragraph, questions)
-    return response_page(questions, answers)
+    result = ""
+    for question, answer in zip(questions, answers):
+        result += f'<div class="subheading mb-3">Question: {question}</div>\n' \
+                  f'<div class="subheading mb-3">Answer :{answer}</div>'
+    return result
+    # return response_page(questions, answers)
 
 
 def bert_model(paragraph, questions):
