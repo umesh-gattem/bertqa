@@ -1,0 +1,6 @@
+tensorflow
+Flask~=1.0
+transformers
+tensorflow_hub
+markupsafe==2.0.1
+
