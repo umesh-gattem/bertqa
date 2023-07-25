@@ -33,18 +33,22 @@ def my_link():
         if "question" + str(i) in request.form.to_dict():
             questions.append(request.form.get("question" + str(i)))
     answers = bert_model(paragraph, questions)
-    result = ""
-    for question, answer in zip(questions, answers):
-        result += f'<div class="subheading mb-3">Question: {question}</div>\n' \
-                  f'<div class="subheading mb-3">Answer :{answer}</div>'
-    return result
-    # return response_page(questions, answers)
+    # result = ""
+    # for question, answer in zip(questions, answers):
+    #     result += f'<div class="subheading mb-3">Question: {question}</div>\n' \
+    #               f'<div class="subheading mb-3">Answer :{answer}</div>'
+    # return result
+    return response_page(questions, answers)
 
 
 def bert_model(paragraph, questions):
     import tensorflow as tf
     import tensorflow_hub as hub
     from transformers import BertTokenizer
+
+
+    print(tf.__version__)
+    print(hub.__version__)
 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = hub.load("https://tfhub.dev/see--/bert-uncased-tf2-qa/1")
